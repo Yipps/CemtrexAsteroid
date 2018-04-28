@@ -4,13 +4,33 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+	public bool canFire { get; set; }
+
+	public float fireRate;
+	public float bulletSize;
+
+	public bool fireRateUpgrade;
+	public bool fireSizeUpgrade;
+
+	private GameObject bullet;
+	private bool inFireCoroutine;
+
+	void Start(){
+		bullet = Resources.Load ("Bullet") as GameObject;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	void Update(){
+		if (!inFireCoroutine && canFire)
+			StartCoroutine (Fire ());
+	}
+
+	public IEnumerator Fire()
+	{
+		inFireCoroutine = true;
+		GameObject _bullet = Instantiate (bullet,transform.position, Quaternion.identity);
+		_bullet.transform.localScale = new Vector3 (bulletSize, bulletSize, bulletSize);
+		_bullet.GetComponent<Rigidbody2D> ().AddForce (transform.right * 20);
+		yield return new WaitForSeconds(1f/fireRate);
+		inFireCoroutine = false;
 	}
 }
