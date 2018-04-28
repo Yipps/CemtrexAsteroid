@@ -56,7 +56,4 @@ public class AsteroidGenerator : MonoBehaviour {
         Vector3 randomVector = new Vector3(xPosition, yPosition, 3);
         return randomVector;
     }
-
-
-
 }

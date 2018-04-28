@@ -13,6 +13,7 @@ public class Asteroid : MonoBehaviour {
     public float scaleMag;
 
 
+
 	// Use this for initialization
 	void Start () {
         this.size = Random.Range(1, 5);
@@ -25,8 +26,9 @@ public class Asteroid : MonoBehaviour {
     }
 
     void initialize() {
-        if (size == 0)
+        if (size == 0) {
             Destroy(gameObject);
+        }
 
         this.rb = GetComponent<Rigidbody2D>();
         this.speed = .03f;
@@ -61,5 +63,4 @@ public class Asteroid : MonoBehaviour {
         asteroidTwo.initialize();
         Destroy(gameObject);
     }
-
 }
