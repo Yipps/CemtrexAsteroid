@@ -24,7 +24,6 @@ public class AsteroidGenerator : MonoBehaviour {
     void spawnRandomAsteroid() {
         this.totalAsteroids++; //Increase total asteroid count
         Vector3 randomPos = Camera.main.ViewportToWorldPoint(createRandomVector());
-
         GameObject asteroidClone = Instantiate(_asteroid, randomPos, Quaternion.identity, this.transform);
         Asteroid cloneData = asteroidClone.GetComponent<Asteroid>();
         cloneData.direction = transform.position - asteroidClone.transform.position;
@@ -54,7 +53,7 @@ public class AsteroidGenerator : MonoBehaviour {
             yPosition = Random.Range(-0.4f, 1.4f);
         }
 
-        Vector3 randomVector = new Vector3(xPosition, yPosition, 0);
+        Vector3 randomVector = new Vector3(xPosition, yPosition, 3);
         return randomVector;
     }
 
