@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+[CreateAssetMenu(fileName = "player")]
+public class Player : ScriptableObject {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	public int lives;
+	public float scaleFactor;
+
+	public float accleration; 
+
+	public bool invincibleUpgrade;
+
 }
