@@ -26,6 +26,8 @@ public class AsteroidGenerator : MonoBehaviour {
         Vector3 randomPos = Camera.main.ViewportToWorldPoint(createRandomVector());
         GameObject asteroidClone = Instantiate(_asteroid, randomPos, Quaternion.identity, this.transform);
         Asteroid cloneData = asteroidClone.GetComponent<Asteroid>();
+		cloneData.size = Random.Range(1, 5);
+		cloneData.enabled = true;
         cloneData.direction = transform.position - asteroidClone.transform.position;
 
     }

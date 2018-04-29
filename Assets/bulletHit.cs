@@ -5,7 +5,9 @@ using UnityEngine;
 public class bulletHit : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll) {
-		if (coll.gameObject.tag == "Ass")
-			coll.gameObject.GetComponent<Asteriod> ().BreakAss ();
+		if (coll.gameObject.tag == "Ass") {
+			coll.gameObject.GetComponent<Asteroid> ().breakAsteroid ();
+			Destroy (gameObject);
+		}
 	}
 }

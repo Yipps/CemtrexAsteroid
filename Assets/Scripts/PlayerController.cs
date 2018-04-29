@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
 
 	public bool isLeftActive{ get; set; }
 	public bool isRightActive{ get; set; }
+	public bool canScale{ get; set; }
 
 	public Player player;
 	public Weapon weapon;
@@ -30,7 +31,7 @@ public class PlayerController : MonoBehaviour {
 			updateRotation();
 
 		//Right hand depth determines acceleration
-		if (isLeftActive && rightHand)
+		if (isLeftActive && rightHand && canScale)
 			scalePlayer ();
 		else if (rightHand.transform.position.z > 2.5f)
 			moveForward ();
@@ -46,7 +47,7 @@ public class PlayerController : MonoBehaviour {
 
 	void moveForward()
 	{
-		rb.AddForce (transform.right * 20, ForceMode2D.Force);
+		rb.AddForce (transform.right * 40, ForceMode2D.Force);
 	}
 
 	public void scalePlayer(){
@@ -59,7 +60,7 @@ public class PlayerController : MonoBehaviour {
 
 		player.scaleFactor = normalizedDistance;
 
-		weapon.bulletSize = normalizedDistance * 0.8f;
+		weapon.bulletSize = Mathf.Clamp(normalizedDistance * 0.8f, 0.2f, 0.8f);
 
 		transform.localScale = new Vector3 (normalizedDistance * scaleMag + 0.1f, normalizedDistance * scaleMag + 0.1f, normalizedDistance * scaleMag + 0.1f);
 

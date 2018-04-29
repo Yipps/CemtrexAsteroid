@@ -16,7 +16,6 @@ public class Asteroid : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        this.size = Random.Range(1, 5);
         initialize();
 	}
 	
@@ -50,17 +49,29 @@ public class Asteroid : MonoBehaviour {
     }
 
     public void breakAsteroid() {
-        GameObject childOne = Instantiate(_asteroid, transform.position, transform.rotation, transform.parent);
-        GameObject childTwo = Instantiate(_asteroid, transform.position, transform.rotation, transform.parent);
-        Asteroid asteroidOne = childOne.GetComponent<Asteroid>();
-        Asteroid asteroidTwo = childTwo.GetComponent<Asteroid>();
+		if (size >= 1) {
+			GameObject childOne = Instantiate (_asteroid, transform.position, transform.rotation, transform.parent);
+			GameObject childTwo = Instantiate (_asteroid, transform.position, transform.rotation, transform.parent);
+			Asteroid asteroidOne = childOne.GetComponent<Asteroid> ();
+			Asteroid asteroidTwo = childTwo.GetComponent<Asteroid> ();
 
-        asteroidOne.direction = rotateVector2(direction, 30f);
-        asteroidTwo.direction = rotateVector2(direction, -30f);
-        asteroidOne.size = size - 1;
-        asteroidTwo.size = size - 1;
-        asteroidOne.initialize();
-        asteroidTwo.initialize();
-        Destroy(gameObject);
+			asteroidOne.direction = rotateVector2 (direction, 45f);
+			asteroidTwo.direction = rotateVector2 (direction, -45f);
+
+			asteroidOne.size = size - 1;
+			asteroidTwo.size = size - 1;
+
+			Debug.Log (size + "");
+			Debug.Log (asteroidOne.size + "");
+			Debug.Log (asteroidTwo.size + "");
+
+			asteroidOne.enabled = true;
+			asteroidTwo.enabled = true;
+
+			childOne.GetComponent<Rigidbody2D> ().velocity = rb.velocity;
+			childTwo.GetComponent<Rigidbody2D> ().velocity = rb.velocity;
+
+		}
+		Destroy (gameObject);
     }
 }
